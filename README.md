@@ -1,1 +1,358 @@
-# future-store
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="asset/icons/icons,future store.jpeg" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Store - Produk Kami</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+        nav {
+            margin: 10px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        nav button {
+            margin: 5px;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        nav button:hover {
+            background-color: #45a049;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+        .product {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .product img {
+            max-width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .product h3 {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .product p {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        .options {
+            margin: 10px 0;
+        }
+        .options select, .options input {
+            padding: 8px;
+            margin: 5px;
+            width: 100px;
+            max-width: 150px;
+        }
+        .order-btn {
+            background-color: #ff5722;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+            font-size: 16px;
+        }
+        .order-btn:hover {
+            background-color: #e64a19;
+        }
+        .contact {
+            margin-top: 40px;
+            text-align: center;
+            padding: 20px;
+            background-color: #eee;
+            border-radius: 8px;
+        }
+        .search {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .search input {
+            padding: 10px;
+            width: 80%;
+            max-width: 300px;
+        }
+        .search button {
+            padding: 10px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .search button:hover {
+            background-color: #0b7dda;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            margin-top: 20px;
+        }
+
+        /* Media Queries untuk HP (layar kecil) */
+        @media (max-width: 768px) {
+            nav button {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+            .product-grid {
+                grid-template-columns: 1fr; /* 1 kolom di HP */
+                gap: 10px;
+            }
+            .product img {
+                height: 150px;
+            }
+            .product h3 {
+                font-size: 16px;
+            }
+            .product p {
+                font-size: 13px;
+            }
+            .options select, .options input {
+                width: 90%;
+            }
+            .order-btn {
+                padding: 15px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Future Store Kami</h1>
+        <nav>
+            <button onclick="showCategory('all')">Semua Produk</button>
+            <button onclick="showCategory('barang')">Barang</button>
+            <button onclick="showCategory('makanan')">Makanan</button>
+            <button onclick="showCategory('coming soon')">Coming soon</button>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="search">
+            <input type="text" id="searchInput" placeholder="Cari produk...">
+            <button onclick="searchProducts()">Cari</button>
+        </div>
+
+        <div id="productContainer" class="product-grid">
+            <!-- Produk makanan -->
+            <div class="product" id="product1" data-category="makanan">
+                <img src="asset/image/cireng sedang.jpeg" alt="Cireng Sedang">
+                <h3>Cireng sedang</h3>
+                <p>Penjelasan: gratis pengiriman jika pembelian diatas pembelian tertentu</p>
+                <div class="options">
+                    <label>isian:</label>
+                    <select>
+                        <option>keju</option>
+                        <option>ayam suwir</option>
+                        <option>bakso</option>
+                        <option>sosis</option>
+                        <option>ati ayam</option>
+                        <option>usus</option>
+                    </select>
+                    <label>Rasa:</label>
+                    <select>
+                        <option>pedas</option>
+                        <option>original</option>
+                        <option>chili oil</option>
+                    </select>
+                    <label>Jumlah:</label>
+                    <input type="number" min="1" value="1">
+                </div>
+                <button class="order-btn" onclick="orderNow('product1')">Order Now</button>
+            </div>
+
+            <div class="product" id="product2" data-category="barang">
+                <img src="asset/image/bucket.jpeg" alt="bucket">
+                <h3>Bucket bunga</h3>
+                <p>Penjelasan: bucket untuk pacar tercinta anda</p>
+                <div class="options">
+                    <label>harga:</label>
+                    <select>
+                        <option>menyesuaikan</option>
+                    </select>
+                    <label>Jumlah:</label>
+                    <input type="number" min="1" max="1" value="1">
+                </div>
+                <button class="order-btn" onclick="orderNow('product2')">Order Now</button>
+            </div>
+
+            <!-- makanan -->
+            <div class="product" id="product3" data-category="makanan">
+                <img src="asset/image/brownies.jpeg" alt="brownies">
+                <h3>Brownies</h3>
+                <p>Penjelasan: manis dan empuk.</p>
+                <div class="options">
+                    <label>Rasa:</label>
+                    <select>
+                        <option>coklat</option>
+                    </select>
+                    <label>Topping:</label>
+                    <select>
+                        <option>oreo</option>
+                        <option>keju</option>
+                        <option>mesis</option>
+                    </select>
+                    <label>Jumlah:</label>
+                    <input type="number" min="1" value="1">
+                </div>
+                <button class="order-btn" onclick="orderNow('product3')">Order Now</button>
+            </div>
+
+            <div class="product" id="product4" data-category="makanan">
+                <img src="asset/image/cirengmini.jpeg" alt="mini cireng">
+                <h3>Cireng Mini</h3>
+                <p>Penjelasan: mantap .</p>
+                <div class="options">
+                    <label>isian</label>
+                    <select>
+                        <option>keju</option>
+                        <option>ayam suwir</option>
+                        <option>bakso</option>
+                        <option>sosis</option>
+                        <option>ati ayam</option>
+                        <option>usus</option>
+                    </select>
+                    <label>Rasa:</label>
+                    <select>
+                        <option>pedas</option>
+                        <option>original</option>
+                        <option>chili oil</option>
+                    <label>Jumlah:</label>
+                    <input type="number" min="1" value="1">
+                </div>
+                <button class="order-btn" onclick="orderNow('product4')">Order Now</button>
+            </div>
+
+            <!-- Produk Makanan -->
+            <div class="product" id="product5" data-category="coming soon">
+                <img src="https://via.placeholder.com/300x200?text=Kopi" alt="coming soon">
+                <h3>coming soon</h3>
+                <p>Penjelasan: .</p>
+                <div class="options">
+                    <label>Kemasan:</label>
+                    <select>
+                        <option>-</option>
+                        <option>-</option>
+                        <option>-</option>
+                    </select>
+                    <label>Jumlah:</label>
+                    <input type="number" min="1" value="1">
+                </div>
+                <button class="order-btn" onclick="orderNow('product5')">Order Now</button>
+            </div>
+
+            <div class="product" id="product6" data-category="comming soon">
+                <img src="https://via.placeholder.com/300x200?text=Coklat" alt="coming soon">
+                <h3>Coming soon</h3>
+                <p>Penjelasan: </p>
+                <div class="options">
+                    <label>Varian:</label>
+                    <select>
+                        <option>-</option>
+                        <option>-</option>
+                        <option>-</option>
+                    </select>
+                    <label>Jumlah:</label>
+                    <input type="number" min="1" value="1">
+                </div>
+                <button class="order-btn" onclick="orderNow('product6')">Order Now</button>
+            </div>
+        </div>
+
+        <div class="contact">
+            <h2>Kontak Kami untuk Pembelian</h2>
+            <p>Email: info@tokoonline.com</p>
+            <p>Telepon: +62 812-3456-7890</p>
+            <p>WhatsApp: <a href="http://wa.me/6283869772065" target="_blank">Klik di sini</a></p>
+            <p>Alamat: Jl. Contoh No. 123, Kota ABC</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Toko Online. Semua hak dilindungi.</p>
+    </footer>
+
+    <script>
+        function showCategory(category) {
+            const products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                if (category === 'all' || product.getAttribute('data-category') === category) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        function searchProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                const title = product.querySelector('h3').textContent.toLowerCase();
+                if (title.includes(query)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        function orderNow(productId) {
+            const product = document.getElementById(productId);
+            const productName = product.querySelector('h3').textContent;
+            const selects = product.querySelectorAll('.options select');
+            const quantityInput = product.querySelector('.options input[type="number"]');
+            const quantity = quantityInput ? quantityInput.value : 1;
+
+            let options = '';
+            selects.forEach(select => {
+                const label = select.previousElementSibling.textContent.replace(':', '');
+                const value = select.value;
+                options += `${label}: ${value}, `;
+            });
+            options = options.slice(0, -2); // Hapus koma terakhir
+
+            const message = `Halo, saya ingin memesan ${productName}. Pilihan: ${options}. Jumlah: ${quantity}.`;
+            const whatsappUrl = `http://wa.me/6283869772065?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
